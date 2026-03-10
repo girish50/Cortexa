@@ -1,6 +1,6 @@
 # ⚡ Cortexa — AI-Powered Industrial Energy Intelligence
 
-**🌐 Live Demo → [https://your-live-link-here.vercel.app](https://your-live-link-here.vercel.app)**
+**🌐 [Click Here to Test Cortexa Demo!](https://cortexa-ai.vercel.app/)**
 
 ---
 
@@ -15,6 +15,7 @@ Cortexa is a real-time dashboard for industrial facilities. It helps factory ope
 Cortexa simulates a live industrial environment with six interconnected modules. Here's exactly what each module does and how they all connect:
 
 ### 1. 🔐 Login & Authentication
+
 When you open the app, you land on a login screen. Enter your credentials (or click **"Use Demo Credentials"**) to access the dashboard. Your session is saved in `localStorage` so you stay logged in on refresh. Logging out clears the session.
 
 ```
@@ -24,7 +25,8 @@ Password →  cortexa2024
 
 ---
 
-### 2. 🖥️ Command Center *(Press `1`)*
+### 2. 🖥️ Command Center _(Press `1`)_
+
 This is the **home screen** — the first thing operators see when they log in.
 
 - A **Health Score gauge** shows the overall system health as a percentage (e.g., 87%), updated every few seconds to simulate a live feed.
@@ -35,7 +37,8 @@ This is the **home screen** — the first thing operators see when they log in.
 
 ---
 
-### 3. 📊 Analytics Hub *(Press `2`)*
+### 3. 📊 Analytics Hub _(Press `2`)_
+
 This module is for **data analysts and energy managers** who want to study patterns.
 
 - An interactive **dual-axis line chart** plots Cost (₹) against Energy (kWh) over time — letting you see exactly when energy spikes and what it costs.
@@ -45,7 +48,8 @@ This module is for **data analysts and energy managers** who want to study patte
 
 ---
 
-### 4. 🚨 Action Center *(Press `3`)*
+### 4. 🚨 Action Center _(Press `3`)_
+
 This is the **alert management hub** — where operators respond to machine issues.
 
 - Alerts are sorted into three severity levels: **Critical** (red), **Warning** (yellow), and **Info** (green).
@@ -57,7 +61,8 @@ This is the **alert management hub** — where operators respond to machine issu
 
 ---
 
-### 5. 🔧 Machines *(Press `4`)*
+### 5. 🔧 Machines _(Press `4`)_
+
 A full inventory of every machine in the facility.
 
 - Each machine is displayed as a card showing its **name, type, health score, status (Online / Maintenance), energy usage, and last service date**.
@@ -73,18 +78,20 @@ A full inventory of every machine in the facility.
 
 ---
 
-### 6. 🤖 AI Assistant *(Press `5`)*
+### 6. 🤖 AI Assistant _(Press `5`)_
+
 A conversational AI interface for operators to ask questions about their facility.
 
-- Type any question (e.g., *"Check machine health"*, *"Show energy trends"*, *"What's the failure prediction?"*) and the AI responds with contextual, structured answers.
-- The assistant performs **keyword analysis on every message**. If your message contains critical words like *"failure"*, *"overheating"*, *"bearing"*, or *"emergency"* — it automatically triggers a **critical alert response** with immediate action recommendations.
+- Type any question (e.g., _"Check machine health"_, _"Show energy trends"_, _"What's the failure prediction?"_) and the AI responds with contextual, structured answers.
+- The assistant performs **keyword analysis on every message**. If your message contains critical words like _"failure"_, _"overheating"_, _"bearing"_, or _"emergency"_ — it automatically triggers a **critical alert response** with immediate action recommendations.
 - **Quick Action buttons** at the top let you ask common questions in one click: Energy Status, Critical Alerts, AI Predictions, Optimization Tips.
 - After critical responses, the AI icon **pulses red** and the mood changes to "alert" for 8 seconds.
 - Supports **browser push notifications** when a critical condition is detected in your message (requires permission).
 
 ---
 
-### 7. 👥 My Team *(Press `6`)*
+### 7. 👥 My Team _(Press `6`)_
+
 A gamified team performance tracker for the operations team.
 
 - Shows the **total monthly impact** — combined energy savings and cost reductions achieved by the team.
@@ -131,38 +138,38 @@ Open **[http://localhost:3000](http://localhost:3000)** in your browser.
 
 ### Available Scripts
 
-| Command | Description |
-|---------|-------------|
-| `npm run dev` | Start local dev server at localhost:3000 |
-| `npm run build` | Build optimized production bundle |
-| `npm run start` | Run the production build locally |
-| `npm run lint` | Check for lint errors |
+| Command         | Description                              |
+| --------------- | ---------------------------------------- |
+| `npm run dev`   | Start local dev server at localhost:3000 |
+| `npm run build` | Build optimized production bundle        |
+| `npm run start` | Run the production build locally         |
+| `npm run lint`  | Check for lint errors                    |
 
 ---
 
 ## 🛠️ Tech Stack
 
-| Technology | Role |
-|-----------|------|
-| **Next.js 14** | App framework (App Router) |
-| **TypeScript 5** | Type safety across the codebase |
-| **Tailwind CSS v4** | Utility-first styling |
-| **Recharts** | Chart rendering (line charts, gauges) |
-| **Radix UI / shadcn** | Accessible, unstyled component base |
-| **Lucide React** | Icon system |
+| Technology            | Role                                  |
+| --------------------- | ------------------------------------- |
+| **Next.js 14**        | App framework (App Router)            |
+| **TypeScript 5**      | Type safety across the codebase       |
+| **Tailwind CSS v4**   | Utility-first styling                 |
+| **Recharts**          | Chart rendering (line charts, gauges) |
+| **Radix UI / shadcn** | Accessible, unstyled component base   |
+| **Lucide React**      | Icon system                           |
 
 ---
 
 ## ⌨️ Keyboard Shortcuts
 
-| Key | Screen |
-|-----|--------|
+| Key | Screen         |
+| --- | -------------- |
 | `1` | Command Center |
-| `2` | Analytics Hub |
-| `3` | Action Center |
-| `4` | Machines |
-| `5` | AI Assistant |
-| `6` | My Team |
+| `2` | Analytics Hub  |
+| `3` | Action Center  |
+| `4` | Machines       |
+| `5` | AI Assistant   |
+| `6` | My Team        |
 
 ---
 
@@ -173,5 +180,5 @@ Distributed under the **BSD 3-Clause License** — see [`LICENSE`](./LICENSE) fo
 ---
 
 <div align="center">
-<strong>© 2024 Cortexa · Built for smarter industrial operations</strong>
+<strong>© 2024 P Girish Varma · Built for smarter industrial operations</strong>
 </div>

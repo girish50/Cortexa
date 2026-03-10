@@ -1,26 +1,27 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { Menu, User, Bell, Zap, Wifi, WifiOff } from "lucide-react"
+import { useState, useEffect, useRef } from "react"
+import { Menu, User, Bell, Zap, Wifi, WifiOff, LogOut, Settings, ChevronDown } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 interface AppHeaderProps {
   onMenuClick: () => void
   onProfileClick: () => void
+  onLogout: () => void
 }
 
-export function AppHeader({ onMenuClick, onProfileClick }: AppHeaderProps) {
+export function AppHeader({ onMenuClick, onProfileClick, onLogout }: AppHeaderProps) {
   const [isOnline, setIsOnline] = useState(true)
   const [notifications, setNotifications] = useState(3)
   const [currentTime, setCurrentTime] = useState(new Date())
+  const [profileOpen, setProfileOpen] = useState(false)
+  const dropdownRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const handleOnline = () => setIsOnline(true)
     const handleOffline = () => setIsOnline(false)
-
     window.addEventListener("online", handleOnline)
     window.addEventListener("offline", handleOffline)
-
     return () => {
       window.removeEventListener("online", handleOnline)
       window.removeEventListener("offline", handleOffline)
@@ -28,11 +29,19 @@ export function AppHeader({ onMenuClick, onProfileClick }: AppHeaderProps) {
   }, [])
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentTime(new Date())
-    }, 60000)
-
+    const timer = setInterval(() => setCurrentTime(new Date()), 60000)
     return () => clearInterval(timer)
+  }, [])
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setProfileOpen(false)
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside)
+    return () => document.removeEventListener("mousedown", handleClickOutside)
   }, [])
 
   return (
@@ -47,7 +56,7 @@ export function AppHeader({ onMenuClick, onProfileClick }: AppHeaderProps) {
               <Zap className="h-4 w-4 text-white" />
               <div className="absolute -top-1 -right-1 h-3 w-3 bg-green-500 rounded-full animate-pulse" />
             </div>
-            <h1 className="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+            <h1 className="text-xl font-bold bg-linear-to-r from-primary to-accent bg-clip-text text-transparent">
               Cortexa
             </h1>
           </div>
@@ -62,11 +71,7 @@ export function AppHeader({ onMenuClick, onProfileClick }: AppHeaderProps) {
 
           {/* Current Time */}
           <div className="text-xs text-muted-foreground hidden md:block">
-            {currentTime.toLocaleTimeString([], {
-              hour: "2-digit",
-              minute: "2-digit",
-              hour12: true,
-            })}
+            {currentTime.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", hour12: true })}
           </div>
 
           {/* Notifications */}
@@ -84,10 +89,46 @@ export function AppHeader({ onMenuClick, onProfileClick }: AppHeaderProps) {
             )}
           </Button>
 
-          {/* User Profile */}
-          <Button variant="ghost" size="icon" onClick={onProfileClick} className="text-foreground hover:bg-muted">
-            <User className="h-5 w-5" />
-          </Button>
+          {/* Profile Dropdown */}
+          <div className="relative" ref={dropdownRef}>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="text-foreground hover:bg-muted flex items-center gap-1"
+              onClick={() => setProfileOpen((prev) => !prev)}
+            >
+              <User className="h-5 w-5" />
+              <ChevronDown className={`h-3 w-3 transition-transform duration-200 ${profileOpen ? "rotate-180" : ""}`} />
+            </Button>
+
+            {profileOpen && (
+              <div className="absolute right-0 top-full mt-2 w-52 bg-card border border-border rounded-xl shadow-xl z-50 overflow-hidden animate-in fade-in slide-in-from-top-2 duration-150">
+                {/* Profile info */}
+                <div className="px-4 py-3 border-b border-border bg-muted/40">
+                  <p className="text-sm font-semibold text-foreground">Admin</p>
+                  <p className="text-xs text-muted-foreground">admin@cortexa.ai</p>
+                </div>
+
+                {/* View Profile */}
+                <button
+                  onClick={() => { onProfileClick(); setProfileOpen(false) }}
+                  className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-foreground hover:bg-muted transition-colors"
+                >
+                  <Settings className="h-4 w-4 text-muted-foreground" />
+                  View Profile
+                </button>
+
+                {/* Logout */}
+                <button
+                  onClick={() => { onLogout(); setProfileOpen(false) }}
+                  className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 transition-colors border-t border-border"
+                >
+                  <LogOut className="h-4 w-4" />
+                  Log Out
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </div>
 
