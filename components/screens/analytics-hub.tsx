@@ -62,6 +62,15 @@ export function AnalyticsHub() {
     if (isSimulationMode) {
       // Exit simulation mode
       setChartData(generateData(selectedPeriod))
+    } else {
+      // Enter simulation mode
+      const baseData = generateData(selectedPeriod)
+      const initialSimulatedData = baseData.map((point) => ({
+        ...point,
+        originalCost: point.cost,
+        originalEnergy: point.energy,
+      }))
+      setChartData(initialSimulatedData)
     }
   }
 
@@ -70,6 +79,8 @@ export function AnalyticsHub() {
     const baseData = generateData(selectedPeriod)
     const simulatedData = baseData.map((point) => ({
       ...point,
+      originalCost: point.cost,
+      originalEnergy: point.energy,
       cost: Math.round(point.cost * (1 - params.energyReduction / 100)),
       energy: Math.round(point.energy * (1 - params.energyReduction / 100)),
     }))
@@ -77,7 +88,13 @@ export function AnalyticsHub() {
   }
 
   const handleResetSimulation = () => {
-    setChartData(generateData(selectedPeriod))
+    const baseData = generateData(selectedPeriod)
+    const resetData = baseData.map((point) => ({
+      ...point,
+      originalCost: point.cost,
+      originalEnergy: point.energy,
+    }))
+    setChartData(resetData)
   }
 
   return (
